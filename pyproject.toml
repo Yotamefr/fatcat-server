@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "fatcat-server"
+version = "0.1.0"
+description = ""
+authors = ["Yotamefr <yotamefr@gmail.com>"]
+readme = "README.md"
+packages = [{include = "fatcat_server"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+python-dotenv = "^1.0.0"
+argparse = "^1.4.0"
+fatcat-utils = {git = "https://github.com/Yotamefr/fatcat-utils", rev = "dev"}
+
+
+[tool.poetry.group.dev.dependencies]
+pylint = "^2.17.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
