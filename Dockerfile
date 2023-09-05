@@ -8,4 +8,4 @@ RUN apk add gcc musl-dev libffi-dev git
 RUN python3 -m pip install poetry
 RUN poetry install
 
-ENTRYPOINT [ "poetry", "run", "python", "-m", "fatcat_worker.__main__" ]
+ENTRYPOINT [ "poetry", "run", "python", "-m", "fatcat_server.__main__" ]
