@@ -180,7 +180,7 @@ motor = "^3.2.0"
 type = "git"
 url = "https://github.com/Yotamefr/fatcat-utils"
 reference = "dev"
-resolved_reference = "96d09aa712d4ebf86590b4127c60a3dd4528dca8"
+resolved_reference = "646b7045417bc2623f4f00038b42da0f8b05e666"
 
 [[package]]
 name = "idna"
