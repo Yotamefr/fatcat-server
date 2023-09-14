@@ -2,13 +2,13 @@
 
 [[package]]
 name = "aio-pika"
-version = "9.2.2"
+version = "9.2.3"
 description = "Wrapper around the aiormq for asyncio and humans"
 optional = false
 python-versions = ">=3.7,<4.0"
 files = [
-    {file = "aio_pika-9.2.2-py3-none-any.whl", hash = "sha256:d8ff6568b67bbf97b146d1fefe72a27c3124c777cb7a56b3353b12f9130e1111"},
-    {file = "aio_pika-9.2.2.tar.gz", hash = "sha256:bf6dcc60085f1bc0b49c7bda3055ef0d17c97a1a87f4d355e8a02c5bf4f1c5bb"},
+    {file = "aio_pika-9.2.3-py3-none-any.whl", hash = "sha256:19052829e1277965c85d461c830a1edb68ddd1020f9b4d6e297e886f2a3d073b"},
+    {file = "aio_pika-9.2.3.tar.gz", hash = "sha256:0ff258e2b62ceac6a52dfd03ea51e55a5ef499c5b308705a3a7cdd85f8a2d513"},
 ]
 
 [package.dependencies]
@@ -168,12 +168,13 @@ develop = false
 aio-pika = "^9.2.1"
 elasticsearch-logging-handler = {git = "https://github.com/Yotamefr/python-elasticsearch-logging"}
 motor = "^3.2.0"
+typing-extensions = "^4.7.1"
 
 [package.source]
 type = "git"
 url = "https://github.com/Yotamefr/fatcat-utils"
 reference = "dev"
-resolved_reference = "991027ae62c2d73b594df9692f6d4a491d22d1e2"
+resolved_reference = "89ab6c4b8597833509f2fa0dd4a1f6189dbb1c9f"
 
 [[package]]
 name = "idna"
