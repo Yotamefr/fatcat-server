@@ -4,8 +4,37 @@ FROM python:3.8-alpine3.17
 WORKDIR /app
 COPY . /app
 
+ENV FATCAT_LOGGER_NAME=server
+
+ENV FATCAT_RABBIT_HOSTNAME=localhost \
+    FATCAT_RABBIT_PORT=5672 \
+    FATCAT_RABBIT_USERNAME=guest\
+    FATCAT_RABBIT_PASSWORD=guest\
+    FATCAT_RABBIT_INCOMING_QUEUE=incoming \
+    FATCAT_RABBIT_FAILED_QUEUE=failed \
+    FATCAT_RABBIT_WORKER_FAILED_QUEUE=worker-failed
+
+ENV FATCAT_MONGO_HOSTNAME=localhost \
+    FATCAT_MONGO_PORT=27017 \
+    # NOT REQUIRED
+    # FATCAT_MONGO_USERNAME= \
+    # FATCAT_MONGO_PASSWORD= \
+    FATCAT_MONGO_DATABASE=FatCat \
+    FATCAT_MONGO_QUEUES_COLLECTION=FatCatQueues \
+    FATCAT_MONGO_SCHEMAS_COLLECTION=FatCatSchemas \
+    FATCAT_MONGO_FAILED_COLLECTION=FatCatFailed \
+    FATCAT_MONGO_WORKER_FAILED_COLLECTION=FatCatWorkerFailed
+
+# NOT REQUIRED
+# ENV ELASTIC_HOST_LOGGER= \
+#     ELASTIC_INDEX_LOGGER= \
+#     ELASTIC_USER_LOGGER= \
+#     ELASTIC_PASSWORD_LOGGER= \
+#     ELASTIC_FLUSH_PERIOD_LOGGER= \
+#     ELASTIC_BATCH_SIZE_LOGGER=
+
 RUN apk add gcc musl-dev libffi-dev git
 RUN python3 -m pip install poetry
 RUN poetry install
 
-ENTRYPOINT [ "poetry", "run", "python", "-m", "fatcat_server.__main__" ]
+ENTRYPOINT [ "poetry", "run", "fatcat-server" ]

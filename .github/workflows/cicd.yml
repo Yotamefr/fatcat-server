@@ -1,0 +1,30 @@
+name: cicd
+
+on:
+  push
+
+jobs:
+  _:
+    name: Jenkins
+    runs-on: self-hosted
+    steps:
+      - name: Generate Branch Name
+        run: |
+          branch-name () {
+            local var1=$1
+            local var2=(${var1//// })
+            local branch= 
+
+            for i in `seq 2 $(( ${#var2[@]} - 1 ))`
+            do
+                branch+=${var2[$i]}/
+            done
+            echo ${branch::$(( ${#branch} - 1 ))}
+          }
+          export BRANCH_NAME=$(branch-name $GITHUB_REF)
+
+      - name: Call Jenkins
+        run: |
+          curl -XPOST localhost:8080/job/${JENKINS_JOB_NAME}/buildWithParameters \
+            --user ${JENKINS_USER}:${JENKINS_TOKEN}
+            --data GIT_BRANCH=BRANCH_NAME

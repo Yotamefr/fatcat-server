@@ -1,14 +1,15 @@
-import argparse
-from dotenv import load_dotenv
-parser = argparse.ArgumentParser()
-parser.add_argument("-e", "--env", type=str, help="The path to the .env file")
-args = parser.parse_args()
+import os
+import socket
+from fatcat_utils import FatCat
+from .__init__ import Server
 
-load_dotenv(args.env)
 
-from .server import Server
+def main():
+    fatcat = FatCat(f"{os.getenv('FATCAT_LOGGER_NAME', socket.gethostname())}")
+    server = Server(fatcat)
+    fatcat.add_listener_group(server)
+    fatcat.run()
 
 
 if __name__ == "__main__":
-    server = Server()
-    server.run()
+    main()

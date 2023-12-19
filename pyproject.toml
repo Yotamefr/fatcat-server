@@ -12,6 +12,8 @@ python-dotenv = "^1.0.0"
 argparse = "^1.4.0"
 fatcat-utils = {git = "https://github.com/Yotamefr/fatcat-utils", rev = "dev"}
 
+[tool.poetry.scripts]
+fatcat-server = "fatcat_server.__main__:main"
 
 [tool.poetry.group.dev.dependencies]
 pylint = "^2.17.5"
