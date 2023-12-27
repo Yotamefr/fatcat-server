@@ -9,6 +9,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Generate Branch Name
+        id: generate-branch-name
         run: |
           branch-name () {
             local var1=$1
@@ -21,6 +22,7 @@ jobs:
             done
             echo ${branch::$(( ${#branch} - 1 ))}
           }
+          echo "BRANCHNAME=$(branch-name $GITHUB_REF)" >> $GITHUB_OUTPUT
 
       - name: Call Jenkins
         env: 
@@ -30,4 +32,4 @@ jobs:
         run: |
           curl -XPOST -o /dev/null localhost:8080/job/$JENKINS_JOB_NAME/buildWithParameters \
             --user $JENKINS_USER:$JENKINS_TOKEN \
-            --data GIT_BRANCH=$(branch-name $GITHUB_REF)
+            --data GIT_BRANCH=${{ steps.generate-branch-name.outputs.BRANCHNAME }}
