@@ -24,7 +24,11 @@ jobs:
           export BRANCH_NAME=$(branch-name $GITHUB_REF)
 
       - name: Call Jenkins
+        env: 
+          JENKINS_JOB_NAME: ${{ vars.JENKINS_JOB_NAME }}
+          JENKINS_USER: ${{ secrets.JENKINS_USER }}
+          JENKINS_TOKEN: ${{ secrets.JENKINS_TOKEN }}
         run: |
-          curl -XPOST localhost:8080/job/${{ vars.JENKINS_JOB_NAME }}/buildWithParameters \
-            --user ${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_TOKEN }} \
-            --data GIT_BRANCH=BRANCH_NAME
+          curl -XPOST localhost:8080/job/$JENKINS_JOB_NAME/buildWithParameters \
+            --user $JENKINS_USER:$JENKINS_TOKEN \
+            --data GIT_BRANCH=$BRANCH_NAME
