@@ -21,14 +21,13 @@ jobs:
             done
             echo ${branch::$(( ${#branch} - 1 ))}
           }
-          export BRANCH_NAME=$(branch-name $GITHUB_REF)
 
       - name: Call Jenkins
         env: 
-          JENKINS_JOB_NAME: ${{ env.JENKINS_JOB_NAME }}
+          JENKINS_JOB_NAME: ${{ vars.JENKINS_JOB_NAME }}
           JENKINS_USER: ${{ secrets.JENKINS_USER }}
           JENKINS_TOKEN: ${{ secrets.JENKINS_TOKEN }}
         run: |
           curl -XPOST -o /dev/null localhost:8080/job/$JENKINS_JOB_NAME/buildWithParameters \
             --user $JENKINS_USER:$JENKINS_TOKEN \
-            --data GIT_BRANCH=$BRANCH_NAME
+            --data GIT_BRANCH=$(branch-name $GITHUB_REF)
