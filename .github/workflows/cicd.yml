@@ -29,6 +29,6 @@ jobs:
           JENKINS_USER: ${{ secrets.JENKINS_USER }}
           JENKINS_TOKEN: ${{ secrets.JENKINS_TOKEN }}
         run: |
-          curl -XPOST localhost:8080/job/$JENKINS_JOB_NAME/buildWithParameters \
+          curl -XPOST -o /dev/null localhost:8080/job/$JENKINS_JOB_NAME/buildWithParameters \
             --user $JENKINS_USER:$JENKINS_TOKEN \
             --data GIT_BRANCH=$BRANCH_NAME
