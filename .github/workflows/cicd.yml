@@ -25,7 +25,7 @@ jobs:
 
       - name: Call Jenkins
         env: 
-          JENKINS_JOB_NAME: ${{ vars.JENKINS_JOB_NAME }}
+          JENKINS_JOB_NAME: ${{ env.JENKINS_JOB_NAME }}
           JENKINS_USER: ${{ secrets.JENKINS_USER }}
           JENKINS_TOKEN: ${{ secrets.JENKINS_TOKEN }}
         run: |
